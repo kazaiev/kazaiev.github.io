@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{#- A plain page. With `[extra] backdrop = "leaf"` a linden leaf hangs on the left, behind the text. #}
+{% block stage %}
+{%- if page.extra.backdrop == "leaf" %}
+<div class="stage">
+<div class="hero backdrop leaf" role="img" aria-label="A golden linden leaf drawn in glowing characters, turning slowly in still air"></div>
+<main class="wrap stage-main">
+<article>
+  <h1>{{ page.title }}</h1>
+  {{ page.content | safe }}
+</article>
+</main>
+</div>
+{%- else %}
+<main class="wrap">
+<article>
+  <h1>{{ page.title }}</h1>
+  {{ page.content | safe }}
+</article>
+</main>
+{%- endif %}
+{% endblock stage %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{#- A post. With `[extra] backdrop = "slab"` (or another solid in ascii-solid.js) it floats one on the left, behind the text. #}
+{% block stage %}
+{%- if page.extra.backdrop %}
+<div class="stage">
+<div class="hero backdrop solid" data-solid="{{ page.extra.backdrop }}" role="img" aria-label="{{ page.extra.backdrop_label | default(value='An outline drawn in glowing characters, turning slowly') }}"></div>
+<main class="wrap stage-main">
+{% include "partials/article.html" %}
+</main>
+</div>
+{%- else %}
+<main class="wrap">
+{% include "partials/article.html" %}
+</main>
+{%- endif %}
+{% endblock stage %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{#- The home page: the fox sits large on the left, behind the content, and fades out toward the text. #}
+{% block body_attrs %} class="home"{% endblock body_attrs %}
+{% block stage %}
+<div class="stage">
+{% set src = "hero/fox.json" %}{% set still = "img/fox-still.png" %}{% set label = "The k4zka fox, drawn in glowing characters" %}{% set framed = false %}{% set align = "left" %}{% set backdrop = true %}{% set scale = 0.8 %}
+{% include "partials/hero.html" %}
+<main class="wrap stage-main">
+{{ section.content | safe }}
+{%- set posts = [p for p in section.pages if p.date] | sort(attribute="date") | reverse %}
+{%- set projects = get_section(path="projects/_index.md") %}
+<h2>Latest</h2>
+{% set pages = posts[:10] %}{% include "partials/post-list.html" %}
+<h2>Projects</h2>
+<ul class="projects">
+{%- for s in projects.subsections %}{% set p = get_section(path=s, metadata_only=true) %}
+  <li><a class="project-card" href="{{ p.permalink | safe }}"><img src="{{ get_url(path=p.extra.card) }}" alt="">
+    <div><strong>{{ p.title }}</strong><p>{{ p.description }}</p></div></a></li>
+{%- endfor %}
+</ul>
+</main>
+</div>
+{% endblock stage %}

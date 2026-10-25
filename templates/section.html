@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{#- A list section. With `[extra] backdrop = "paws"` the fox's prints walk up the left, behind the list. #}
+{% block stage %}
+{%- if section.extra.backdrop == "paws" %}
+<div class="stage">
+<div class="hero backdrop paws" role="img" aria-label="A fox's paw prints in glowing characters, walking up the page"></div>
+<main class="wrap stage-main">
+<h1>{{ section.title }}</h1>
+{{ section.content | safe }}
+{% set pages = section.pages %}{% include "partials/post-list.html" %}
+</main>
+</div>
+{%- else %}
+<main class="wrap">
+<h1>{{ section.title }}</h1>
+{{ section.content | safe }}
+{% set pages = section.pages %}{% include "partials/post-list.html" %}
+</main>
+{%- endif %}
+{% endblock stage %}

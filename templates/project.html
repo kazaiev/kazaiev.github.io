@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{#- A project page: its hero sits large on the left, behind the content, the way the fox does on the home page. #}
+{% block stage %}
+<div class="stage">
+{%- if section.extra.hero %}
+{% set src = section.extra.hero %}{% set still = section.extra.still %}{% set label = section.extra.hero_label %}{% set framed = false %}{% set align = "left" %}{% set backdrop = true %}{% set scale = 0.8 %}
+{% include "partials/hero.html" %}
+{%- endif %}
+<main class="wrap stage-main">
+<h1>{{ (section.extra.title_html or section.title) | safe }}</h1>
+{%- if section.description %}<p class="lede">{{ section.description }}</p>{% endif %}
+{{ section.content | safe }}
+<h2>Posts</h2>
+{#- the project's posts: any post that names it in `[extra] project` (Tera 2 can't join two lists, so posts live in posts/) #}
+{%- set slug = section.components | last %}
+{%- set posts_section = get_section(path="posts/_index.md") %}
+{%- set tagged = [p for p in posts_section.pages if p.extra?.project == slug] %}
+{%- set pages = tagged | sort(attribute="date") | reverse %}
+{% include "partials/post-list.html" %}
+</main>
+</div>
+{% endblock stage %}

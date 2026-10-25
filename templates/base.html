@@ -1,0 +1,52 @@
+<!doctype html>
+{%- if page %}{% set ctx = page %}{% set parent = get_section(path=page.ancestors | last, metadata_only=true) %}
+{%- elif section %}{% set ctx = section %}{% if section.ancestors | length > 0 %}{% set parent = get_section(path=section.ancestors | last, metadata_only=true) %}{% else %}{% set parent = section %}{% endif %}
+{%- endif %}
+{%- if ctx %}
+{%- set t = ctx.extra.theme or parent.extra.theme or "fox" %}
+{%- set card = ctx.extra.card or parent.extra.card or config.extra.cards[t] %}
+{%- set page_title = ctx.title or "" %}
+{%- set page_description = ctx.description or config.description %}
+{%- else %}{% set t = "fox" %}{% set card = config.extra.cards.fox %}{% set page_title = "" %}{% set page_description = config.description %}
+{%- endif %}
+<html lang="en" data-theme="{{ t }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>{% if page_title and page_title != config.title %}{{ page_title }} · {% endif %}{{ config.title }}</title>
+<meta name="description" content="{{ page_description }}">
+<meta property="og:title" content="{{ page_title | default(value=config.title) }}">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:image" content="{{ get_url(path=card) }}">
+<meta property="og:type" content="{% if page %}article{% else %}website{% endif %}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="{{ get_url(path='css/site.css', cachebust=true) }}">
+<link rel="stylesheet" href="{{ get_url(path='giallo.css') }}">
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
+<link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+</head>
+<body{% block body_attrs %}{% endblock body_attrs %}>
+<header class="site-header"><div class="wide">
+  <a class="site-title" href="{{ get_url(path='/') }}"><span>alex</span>.k4zka.online</a>
+  <nav>
+    <a href="{{ get_url(path='@/posts/_index.md') }}"{% if (current_path or "") is starting_with(pat="/posts") %} aria-current="page"{% endif %}>posts</a>
+    <a href="{{ get_url(path='@/projects/_index.md') }}"{% if (current_path or "") is starting_with(pat="/projects") %} aria-current="page"{% endif %}>projects</a>
+    <a href="{{ get_url(path='@/about.md') }}"{% if (current_path or "") is starting_with(pat="/about") %} aria-current="page"{% endif %}>about</a>
+  </nav>
+</div></header>
+{% block stage %}
+{% block hero %}{% endblock hero %}
+<main class="wrap">
+{% block content %}{% endblock content %}
+</main>
+{% endblock stage %}
+<footer><div class="wide">
+  <a href="{{ get_url(path='atom.xml') }}">feed</a> · built with <a href="https://www.getzola.org/">Zola</a>
+</div></footer>
+<script src="{{ get_url(path='js/ascii-hero.js', cachebust=true) }}" defer></script>
+<script src="{{ get_url(path='js/ascii-solid.js', cachebust=true) }}" defer></script>
+<script src="{{ get_url(path='js/ascii-paws.js', cachebust=true) }}" defer></script>
+<script src="{{ get_url(path='js/ascii-leaf.js', cachebust=true) }}" defer></script>
+</body>
+</html>

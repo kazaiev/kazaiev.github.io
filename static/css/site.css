@@ -1,0 +1,123 @@
+@font-face { font-family: "JetBrains Mono"; font-weight: 500; font-display: swap; src: url("../fonts/JetBrainsMono-Medium.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 700; font-display: swap; src: url("../fonts/JetBrainsMono-Bold.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 800; font-display: swap; src: url("../fonts/JetBrainsMono-ExtraBold.woff2") format("woff2"); }
+
+/* One theme per project. `fox` is the k4zka fox's magenta and purple, for everything personal;
+   `oxide` is OxidizedInk's rust and verdigris. A new project adds a block in both schemes. */
+:root, [data-theme="fox"] {
+  --bg: #0b0612; --surface: #150c20; --border: #2b1a3d;
+  --text: #ece5f3; --muted: #a596b6;
+  --accent: #fc0083; --accent-2: #b63cff; --glow: rgba(252, 0, 131, .55);
+  --screen: #000;
+}
+[data-theme="oxide"] {
+  --bg: #0c0806; --surface: #17100b; --border: #34251a;
+  --text: #efe7de; --muted: #b2a393;
+  --accent: #f75c14; --accent-2: #3cc6c4; --glow: rgba(247, 92, 20, .5);
+  --screen: #000;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 1.125rem/1.65 "Iowan Old Style", "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+}
+a { color: var(--accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent-2); }
+.mono, h1, h2, h3, h4, nav, .meta, .post-list time, .tags, footer, code, pre, kbd {
+  font-family: "JetBrains Mono", Menlo, "SF Mono", Monaco, monospace;
+}
+
+.wrap { max-width: 44rem; margin: 0 auto; padding: 0 16px; }
+.wide { max-width: 64rem; margin: 0 auto; padding: 0 16px; }
+
+/* header */
+.site-header { border-bottom: 1px solid var(--border); }
+.site-header .wide { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 1rem; padding-bottom: .9rem; }
+.site-title { font: 800 1.25rem/1 "JetBrains Mono", monospace; color: var(--text); text-decoration: none; letter-spacing: -.01em; }
+.site-title span { color: var(--accent); text-shadow: 0 0 12px var(--glow); }
+nav { display: flex; gap: 1.1rem; font-size: .9rem; font-weight: 500; }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover, nav a[aria-current="page"] { color: var(--accent); }
+
+/* the hero: a dark screen */
+.hero {
+  position: relative; overflow: hidden; background: var(--screen) center / contain no-repeat;
+  height: clamp(260px, 58vh, 560px); margin: 0 0 2rem;
+}
+.hero.framed { border-radius: 14px; margin: 1.5rem 0 2rem; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero .hero-sharp { z-index: 1; }
+.hero.live { background-image: none !important; }
+.hero noscript img { width: 100%; height: 100%; object-fit: contain; }
+
+/* the home page and project pages: the hero large on the left, behind the content, fading out toward the text */
+.stage { position: relative; overflow: hidden; min-height: min(88vh, 860px); }  /* tall enough for the whole backdrop */
+.hero.backdrop {
+  position: absolute; top: 0; left: 0; z-index: 0; margin: 0; pointer-events: none;
+  width: min(64vw, 1000px); height: min(88vh, 860px); background-color: transparent;
+  -webkit-mask-image: linear-gradient(to right, #000 30%, rgba(0,0,0,.35) 62%, transparent 92%),
+                      linear-gradient(to bottom, #000 55%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(to right, #000 30%, rgba(0,0,0,.35) 62%, transparent 92%),
+                      linear-gradient(to bottom, #000 55%, transparent 100%);
+          mask-composite: intersect;
+}
+.stage-main { position: relative; z-index: 1; max-width: 40rem; margin: 0 max(16px, 6vw) 0 max(16px, 37vw); padding-top: clamp(3rem, 14vh, 9rem); }
+@media (max-width: 900px) {
+  .stage { min-height: 0; }
+  .hero.backdrop { width: 100%; height: 72vh; opacity: .55;
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); }
+  .stage-main { margin: 0 auto; padding-top: 38vh; }
+}
+
+/* headings */
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.015em; }
+h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 800; margin: 2rem 0 .5rem; }
+h1 .accent, .glow { color: var(--accent); text-shadow: 0 0 18px var(--glow); }
+h1 .accent-2 { color: var(--accent-2); text-shadow: 0 0 18px var(--glow); }
+h2 { font-size: 1.4rem; font-weight: 700; margin: 2.4rem 0 .6rem; }
+h3 { font-size: 1.1rem; font-weight: 700; margin: 2rem 0 .4rem; }
+.lede { font-size: 1.2rem; color: var(--muted); margin: .2rem 0 2rem; }
+.meta { color: var(--muted); font-size: .85rem; margin: 0 0 2rem; }
+
+/* lists of posts and projects */
+.post-list { list-style: none; padding: 0; margin: 0 0 3rem; }
+.post-list li { padding: .9rem 0; border-bottom: 1px solid var(--border); }
+.post-list a { font-size: 1.15rem; text-decoration: none; color: var(--text); }
+.post-list a:hover { color: var(--accent); }
+.post-list time { display: block; font-size: .8rem; color: var(--muted); margin-bottom: .15rem; }
+.post-list p { margin: .3rem 0 0; color: var(--muted); font-size: 1rem; }
+.tag { font: 500 .75rem "JetBrains Mono", monospace; color: var(--accent-2); margin-left: .4rem; }
+
+.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.2rem; margin: 0 0 3rem; padding: 0; list-style: none; }
+.project-card { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; text-decoration: none; color: var(--text); }
+.project-card:hover { border-color: var(--accent); color: var(--text); }
+.project-card img { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; background: #000; }
+.project-card div { padding: .9rem 1rem 1.1rem; }
+.project-card strong { font: 700 1.05rem "JetBrains Mono", monospace; }
+.project-card p { margin: .35rem 0 0; color: var(--muted); font-size: .95rem; }
+
+/* prose */
+article p, article li { hyphens: auto; }
+article img { max-width: 100%; height: auto; border-radius: 8px; }
+blockquote { margin: 1.5rem 0; padding: .2rem 0 .2rem 1.1rem; border-left: 3px solid var(--accent); color: var(--muted); }
+hr { border: 0; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+code { font-size: .86em; background: var(--surface); padding: .1em .35em; border-radius: 4px; }
+pre { font-size: .85rem; line-height: 1.55; background: #0a0a0c; color: #e6e1dc; padding: 1rem 1.1rem; border-radius: 10px; overflow-x: auto; border: 1px solid var(--border); }
+pre code { background: none; padding: 0; font-size: inherit; }
+
+/* footer: small and quiet, bottom right */
+footer { border-top: 1px solid var(--border); margin-top: 4rem; padding: 1.1rem 0 1.6rem; font-size: .72rem; color: var(--muted); opacity: .65; }
+footer .wide { text-align: right; }
+footer a { color: inherit; text-decoration: none; }
+footer a:hover { color: var(--accent); opacity: 1; }
+footer:hover { opacity: 1; }
+
+@media (max-width: 520px) {
+  body { font-size: 1.05rem; }
+  nav { gap: .85rem; }
+  .hero { height: clamp(220px, 48vh, 420px); }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }

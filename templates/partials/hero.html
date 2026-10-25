@@ -1,0 +1,6 @@
+{#- A live ASCII hero. `src` is the JSON under static/, `still` the PNG shown until it loads (and without JS).
+     `align = "left"` puts the art at the left edge instead of the middle; `backdrop` lays it behind the page. #}
+<div class="hero{% if framed %} framed{% endif %}{% if backdrop %} backdrop{% endif %}" data-src="{{ get_url(path=src) }}"{% if align %} data-align="{{ align }}"{% endif %}{% if scale %} data-scale="{{ scale }}"{% endif %} role="img" aria-label="{{ label }}"
+     style="background-image: url('{{ get_url(path=still) }}')">
+  <noscript><img src="{{ get_url(path=still) }}" alt="{{ label }}"></noscript>
+</div>

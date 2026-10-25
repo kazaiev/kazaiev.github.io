@@ -1,0 +1,19 @@
+base_url = "https://alex.k4zka.online"
+title = "alex.k4zka.online"
+description = "Alex's notes and projects."
+default_language = "en"
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+compile_sass = false
+taxonomies = [{ name = "tags" }]
+
+[markdown]
+smart_punctuation = true
+
+[markdown.highlighting]
+style = "class"
+theme = "github-dark"
+
+[extra]
+# The social card each theme falls back to, when a page names none.
+cards = { fox = "img/card-fox.png", oxide = "img/oxidized-ink-card.png" }

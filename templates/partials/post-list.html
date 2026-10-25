@@ -1,0 +1,11 @@
+<ul class="post-list">
+{%- for p in pages %}
+  <li>
+    <time datetime="{{ p.date }}">{{ p.date | date(format="%-d %B %Y") }}</time>
+    <a href="{{ p.permalink | safe }}">{{ p.title }}</a>{% if p.extra.project %}<span class="tag">{{ p.extra.project }}</span>{% endif %}
+    {%- if p.description %}<p>{{ p.description }}</p>{% endif %}
+  </li>
+{%- else %}
+  <li class="meta">Nothing here yet.</li>
+{%- endfor %}
+</ul>

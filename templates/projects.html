@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ section.title }}</h1>
+{{ section.content | safe }}
+<ul class="projects">
+{%- for s in section.subsections %}{% set p = get_section(path=s, metadata_only=true) %}
+  <li><a class="project-card" href="{{ p.permalink | safe }}"><img src="{{ get_url(path=p.extra.card) }}" alt="">
+    <div><strong>{{ p.title }}</strong><p>{{ p.description }}</p></div></a></li>
+{%- endfor %}
+</ul>
+{% endblock content %}
