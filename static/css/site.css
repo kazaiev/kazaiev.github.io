@@ -91,6 +91,16 @@ h3 { font-size: 1.1rem; font-weight: 700; margin: 2rem 0 .4rem; }
 .post-list p { margin: .3rem 0 0; color: var(--muted); font-size: 1rem; }
 .tag { font: 500 .75rem "JetBrains Mono", monospace; color: var(--accent-2); margin-left: .4rem; }
 
+/* a project's roadmap: numbered steps, the done ones lit in the second accent */
+.roadmap { list-style: none; counter-reset: step; padding: 0; margin: 0 0 3rem; }
+.roadmap li { counter-increment: step; position: relative; padding: .9rem 0 .9rem 2.8rem; border-bottom: 1px solid var(--border); }
+.roadmap li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: .95rem; font: 700 1rem "JetBrains Mono", monospace; color: var(--muted); opacity: .6; }
+.roadmap li.done::before { color: var(--accent-2); opacity: 1; text-shadow: 0 0 12px currentColor; }
+.roadmap strong { font: 700 1.05rem "JetBrains Mono", monospace; color: var(--text); }
+.roadmap .status { font: 500 .75rem "JetBrains Mono", monospace; color: var(--accent-2); margin-left: .6rem; }
+.roadmap .status::before { content: "✓ "; }
+.roadmap p { margin: .3rem 0 0; color: var(--muted); font-size: 1rem; }
+
 .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1.2rem; margin: 0 0 3rem; padding: 0; list-style: none; }
 .project-card { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; text-decoration: none; color: var(--text); }
 .project-card:hover { border-color: var(--accent); color: var(--text); }
