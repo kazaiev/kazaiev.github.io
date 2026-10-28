@@ -25,7 +25,7 @@ hero_label = "An ink drop drawn in glowing characters: the firmware's own main.r
 <p>Kerned, justified text set into pages. The library, the reading view, the menu, the contents, the settings.</p></li>
 <li class="done"><strong>PC simulator</strong><span class="status">done</span>
 <p>Either a render in a window or a screenshot generator.</p></li>
-<li><strong>Inkplate firmware</strong>
+<li class="done"><strong>Inkplate firmware</strong><span class="status">done</span>
 <p>The panel driver, the SD card, sleep.</p></li>
 <li><strong>3D-printable case</strong>
 <p>My own enclosure, with physical buttons, around the spare 4000&nbsp;mAh 606090 cell.</p></li>
