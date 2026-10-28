@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% block content %}
+{#- The projects list, with circuit traces routing themselves on the left, behind the cards. #}
+{% block stage %}
+<div class="stage">
+<div class="hero backdrop traces" role="img" aria-label="Circuit traces in glowing characters, routing themselves across a board"></div>
+<main class="wrap stage-main">
 <h1>{{ section.title }}</h1>
 {{ section.content | safe }}
 <ul class="projects">
@@ -8,4 +12,6 @@
     <div><strong>{{ p.title }}</strong><p>{{ p.description }}</p></div></a></li>
 {%- endfor %}
 </ul>
-{% endblock content %}
+</main>
+</div>
+{% endblock stage %}
