@@ -3,7 +3,8 @@
 @font-face { font-family: "JetBrains Mono"; font-weight: 800; font-display: swap; src: url("../fonts/JetBrainsMono-ExtraBold.woff2") format("woff2"); }
 
 /* One theme per project. `fox` is the k4zka fox's magenta and purple, for everything personal;
-   `oxide` is OxidizedInk's rust and verdigris. A new project adds a block in both schemes. */
+   `oxide` is OxidizedInk's rust and verdigris; `tesser` is Tesser-4C7's phosphor and amber.
+   A new project adds a block here. */
 :root, [data-theme="fox"] {
   --bg: #0b0612; --surface: #150c20; --border: #2b1a3d;
   --text: #ece5f3; --muted: #a596b6;
@@ -15,6 +16,12 @@
   --text: #efe7de; --muted: #b2a393;
   --accent: #f75c14; --accent-2: #3cc6c4; --glow: rgba(247, 92, 20, .5);
   --screen: #000;
+}
+[data-theme="tesser"] {
+  --bg: #050907; --surface: #0c1511; --border: #1b2e25;
+  --text: #e2f1e8; --muted: #8ea89b;
+  --accent: #3df2a0; --accent-2: #f5b43c; --glow: rgba(61, 242, 160, .45);
+  --screen: #020403;
 }
 
 * { box-sizing: border-box; }
@@ -81,6 +88,9 @@ h2 { font-size: 1.4rem; font-weight: 700; margin: 2.4rem 0 .6rem; }
 h3 { font-size: 1.1rem; font-weight: 700; margin: 2rem 0 .4rem; }
 .lede { font-size: 1.2rem; color: var(--muted); margin: .2rem 0 2rem; }
 .meta { color: var(--muted); font-size: .85rem; margin: 0 0 2rem; }
+
+/* a credit line under a project's lede */
+.credit { color: var(--muted); font-size: .85rem; opacity: .8; margin: -1.2rem 0 2rem; }
 
 /* lists of posts and projects */
 .post-list { list-style: none; padding: 0; margin: 0 0 3rem; }

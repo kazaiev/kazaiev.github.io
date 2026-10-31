@@ -1,10 +1,13 @@
 {% extends "base.html" %}
-{#- A project page: its hero sits large on the left, behind the content, the way the fox does on the home page. #}
+{#- A project page: its hero sits large on the left, behind the content, the way the fox does on the home page.
+    `[extra] backdrop` names a glyph piece of its own instead, such as Tesser-4C7's "tiles" (ascii-tiles.js). #}
 {% block stage %}
 <div class="stage">
 {%- if section.extra.hero %}
 {% set src = section.extra.hero %}{% set still = section.extra.still %}{% set label = section.extra.hero_label %}{% set framed = false %}{% set align = "left" %}{% set backdrop = true %}{% set scale = 0.8 %}
 {% include "partials/hero.html" %}
+{%- elif section.extra.backdrop %}
+<div class="hero backdrop {{ section.extra.backdrop }}" data-align="left" role="img" aria-label="{{ section.extra.hero_label }}"></div>
 {%- endif %}
 <main class="wrap stage-main">
 <h1>{{ (section.extra.title_html or section.title) | safe }}</h1>

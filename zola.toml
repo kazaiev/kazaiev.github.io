@@ -16,4 +16,4 @@ theme = "github-dark"
 
 [extra]
 # The social card each theme falls back to, when a page names none.
-cards = { fox = "img/card-fox.png", oxide = "img/oxidized-ink-card.png" }
+cards = { fox = "img/card-fox.png", oxide = "img/oxidized-ink-card.png", tesser = "img/tesser-4c7-card.png" }
