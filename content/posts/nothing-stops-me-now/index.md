@@ -7,6 +7,8 @@ draft = false
 [extra]
 theme = "tesser"
 project = "tesser-4c7"
+backdrop = "tile"
+backdrop_label = "A single Tesser-4C7 tile drawn in glowing characters, turning slowly: a square block with its screen on the front and the halo lit round its sides"
 +++
 
 I was cleaning up today, and found this old thing.. I spent ample time with good old Zachtronics TIS-100. I always wanted to build one in real world, and I guess nothing stops me from doing that now.
