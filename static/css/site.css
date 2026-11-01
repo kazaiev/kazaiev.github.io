@@ -102,9 +102,9 @@ h3 { font-size: 1.1rem; font-weight: 700; margin: 2rem 0 .4rem; }
 .tag { font: 500 .75rem "JetBrains Mono", monospace; color: var(--accent-2); margin-left: .4rem; }
 
 /* a project's roadmap: numbered steps, the done ones lit in the second accent */
-.roadmap { list-style: none; counter-reset: step; padding: 0; margin: 0 0 3rem; }
-.roadmap li { counter-increment: step; position: relative; padding: .9rem 0 .9rem 2.8rem; border-bottom: 1px solid var(--border); }
-.roadmap li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: .95rem; font: 700 1rem "JetBrains Mono", monospace; color: var(--muted); opacity: .6; }
+.roadmap { list-style: none; padding: 0; margin: 0 0 3rem; }
+.roadmap li { position: relative; padding: .9rem 0 .9rem 2.8rem; border-bottom: 1px solid var(--border); }
+.roadmap li::before { content: attr(data-n); position: absolute; left: 0; top: .95rem; font: 700 1rem "JetBrains Mono", monospace; color: var(--muted); opacity: .6; }
 .roadmap li.done::before { color: var(--accent-2); opacity: 1; text-shadow: 0 0 12px currentColor; }
 .roadmap strong { font: 700 1.05rem "JetBrains Mono", monospace; color: var(--text); }
 .roadmap .status { font: 500 .75rem "JetBrains Mono", monospace; color: var(--accent-2); margin-left: .6rem; }
@@ -141,3 +141,13 @@ footer:hover { opacity: 1; }
   .hero { height: clamp(220px, 48vh, 420px); }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+/* the roadmap's earlier done steps fold away; each step keeps the number it joined with */
+.roadmap-earlier > summary { list-style: none; cursor: pointer; position: relative; padding: .9rem 0 .9rem 2.8rem; border-bottom: 1px solid var(--border); font: 500 .85rem "JetBrains Mono", monospace; color: var(--muted); }
+.roadmap-earlier > summary::-webkit-details-marker { display: none; }
+.roadmap-earlier > summary::before { content: "▸"; position: absolute; left: .35rem; color: var(--accent-2); }
+.roadmap-earlier[open] > summary::before { content: "▾"; }
+.roadmap-earlier > summary:hover { color: var(--text); }
+.roadmap-earlier > .roadmap { margin-bottom: 0; }
+.roadmap li.wip::before { color: var(--accent); opacity: 1; }
+.roadmap .status.wip { color: var(--accent); }
+.roadmap .status.wip::before { content: "◐ "; }
