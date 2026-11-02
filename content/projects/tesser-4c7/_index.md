@@ -20,7 +20,7 @@ hero_label = "A grid of four by three tiles drawn in glowing characters, each wi
 <ol class="roadmap">
 <li data-n="01"><strong>Edge test</strong>
 <p>One mating wall of each kind, cut from the shell: glue in the magnets, fit the pogo pair, then snap, slide and pull.</p></li>
-<li data-n="02"><strong>Tile print</strong>
+<li class="wip" data-n="02"><strong>Tile print</strong><span class="status wip">in progress</span>
 <p>Shell, halo and lid, with corner pins to keep them in line.</p></li>
 <li data-n="03"><strong>Simulator</strong>
 <p>Write and step programs on a PC before the tiles exist.</p></li>
