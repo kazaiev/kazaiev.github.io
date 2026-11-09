@@ -17,7 +17,7 @@ hero_label = "An ink drop drawn in glowing characters: the firmware's own main.r
 ## Roadmap
 
 <details class="roadmap-earlier">
-<summary>14 earlier steps, done</summary>
+<summary>16 earlier steps, done</summary>
 <ol class="roadmap">
 <li class="done" data-n="01"><strong>EPUB parsing</strong><span class="status">done</span>
 <p>Books are read on the device: ZIP, XHTML, and the table of contents for EPUB 2 and 3.</p></li>
@@ -47,21 +47,21 @@ hero_label = "An ink drop drawn in glowing characters: the firmware's own main.r
 <p>The book's cover, a picture from the card, or the page while asleep, with JPEG and PNG decoders written for the reader.</p></li>
 <li class="done" data-n="15"><strong>Pictures in books</strong><span class="status">done</span>
 <p>Illustrations with their captions; books open on their cover.</p></li>
-</ol>
-</details>
-
-<ol class="roadmap">
 <li class="done" data-n="16"><strong>Covers in the library</strong><span class="status">done</span>
 <p>Five books a screen with cover, title, author and how much is read.</p></li>
 <li class="done" data-n="17"><strong>The logo</strong><span class="status">done</span>
 <p>The ink-drop logo at power-on and as a sleep screen.</p></li>
-<li class="wip" data-n="06"><strong>3D-printable case</strong><span class="status wip">first full print</span>
+</ol>
+</details>
+
+<ol class="roadmap">
+<li class="done" data-n="06"><strong>3D-printable case</strong><span class="status">done</span>
 <p>My own enclosure, with physical buttons, around the spare 4000&nbsp;mAh 606090 cell.</p></li>
-<li class="wip" data-n="18"><strong>Wi-Fi transfer</strong><span class="status wip">in progress</span>
+<li class="done" data-n="18"><strong>Wi-Fi transfer</strong><span class="status">done</span>
 <p>Upload, download and delete books from a browser.</p></li>
-<li data-n="19"><strong>Hyphenation</strong>
+<li class="done" data-n="19"><strong>Hyphenation</strong><span class="status">done</span>
 <p>English and Ukrainian words broken only where a line would be loose.</p></li>
-<li data-n="20"><strong>Chapter skip</strong>
+<li class="wip" data-n="20"><strong>Chapter skip</strong><span class="status wip">in progress</span>
 <p>Holding Next or Prev moves a chapter.</p></li>
 <li data-n="21"><strong>Go to a percentage</strong>
 <p>Jump anywhere in a book from the reading menu.</p></li>
