@@ -17,7 +17,7 @@ hero_label = "An ink drop drawn in glowing characters: the firmware's own main.r
 ## Roadmap
 
 <details class="roadmap-earlier">
-<summary>16 earlier steps, done</summary>
+<summary>23 earlier steps, done</summary>
 <ol class="roadmap">
 <li class="done" data-n="01"><strong>EPUB parsing</strong><span class="status">done</span>
 <p>Books are read on the device: ZIP, XHTML, and the table of contents for EPUB 2 and 3.</p></li>
@@ -29,6 +29,8 @@ hero_label = "An ink drop drawn in glowing characters: the firmware's own main.r
 <p>Either a render in a window or a screenshot generator.</p></li>
 <li class="done" data-n="05"><strong>Inkplate firmware</strong><span class="status">done</span>
 <p>The panel driver, the SD card, sleep.</p></li>
+<li class="done" data-n="06"><strong>3D-printable case</strong><span class="status">done</span>
+<p>My own enclosure, with physical buttons, around the spare 4000&nbsp;mAh 606090 cell.</p></li>
 <li class="done" data-n="07"><strong>Battery calibration</strong><span class="status">done</span>
 <p>Readings that match a multimeter (checked at 4.18&nbsp;V).</p></li>
 <li class="done" data-n="08"><strong>Narrower button strip</strong><span class="status">done</span>
@@ -51,22 +53,38 @@ hero_label = "An ink drop drawn in glowing characters: the firmware's own main.r
 <p>Five books a screen with cover, title, author and how much is read.</p></li>
 <li class="done" data-n="17"><strong>The logo</strong><span class="status">done</span>
 <p>The ink-drop logo at power-on and as a sleep screen.</p></li>
-</ol>
-</details>
-
-<ol class="roadmap">
-<li class="done" data-n="06"><strong>3D-printable case</strong><span class="status">done</span>
-<p>My own enclosure, with physical buttons, around the spare 4000&nbsp;mAh 606090 cell.</p></li>
 <li class="done" data-n="18"><strong>Wi-Fi transfer</strong><span class="status">done</span>
 <p>Upload, download and delete books from a browser.</p></li>
 <li class="done" data-n="19"><strong>Hyphenation</strong><span class="status">done</span>
 <p>English and Ukrainian words broken only where a line would be loose.</p></li>
-<li class="wip" data-n="20"><strong>Chapter skip</strong><span class="status wip">in progress</span>
+<li class="done" data-n="20"><strong>Chapter skip</strong><span class="status">done</span>
 <p>Holding Next or Prev moves a chapter.</p></li>
-<li data-n="21"><strong>Go to a percentage</strong>
+<li class="done" data-n="21"><strong>Go to a percentage</strong><span class="status">done</span>
 <p>Jump anywhere in a book from the reading menu.</p></li>
-<li data-n="22"><strong>Bookmarks</strong>
+<li class="done" data-n="22"><strong>Bookmarks</strong><span class="status">done</span>
 <p>Ribbon mark, bookmark list with each page's first words.</p></li>
-<li data-n="23"><strong>Footnotes</strong>
+<li class="done" data-n="23"><strong>Footnotes</strong><span class="status">done</span>
 <p>Notes screen, holding Menu comes back.</p></li>
+</ol>
+</details>
+
+<ol class="roadmap">
+<li class="done" data-n="24"><strong>Fonts from the card</strong><span class="status">done</span>
+<p>Any font family, sent from the Wi-Fi page and picked under Settings.</p></li>
+<li class="done" data-n="25"><strong>Updates without USB</strong><span class="status">done</span>
+<p>Two app slots; new firmware from the Wi-Fi page or the card, and back to the old one if it fails to start.</p></li>
+<li class="done" data-n="26"><strong>Release builds</strong><span class="status">done</span>
+<p>The license, the changelog, tests on every pull request, and a release workflow.</p></li>
+<li class="done" data-n="27"><strong>Settings on the Wi-Fi page</strong><span class="status">done</span>
+<p>Every setting, and the network's name and password, from a browser.</p></li>
+<li class="done" data-n="28"><strong>Plain-text and Markdown books</strong><span class="status">done</span>
+<p><code>.txt</code> and <code>.md</code> files, with headings as chapters.</p></li>
+<li class="done" data-n="29"><strong>Folders</strong><span class="status">done</span>
+<p>Books in folders up to three deep, on the card or made from the Wi-Fi page.</p></li>
+<li class="done" data-n="30"><strong>Library order</strong><span class="status">done</span>
+<p>Recent, title, author or added.</p></li>
+<li class="done" data-n="31"><strong>Delete book</strong><span class="status">done</span>
+<p>Delete the open book from the reading menu, after a confirmation.</p></li>
+<li class="done" data-n="32"><strong>Book CSS</strong><span class="status">done</span>
+<p>The book's own alignment, emphasis, indents, spacing, hidden text and page breaks, with a setting to turn it off.</p></li>
 </ol>
