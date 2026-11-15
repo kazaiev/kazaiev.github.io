@@ -1,0 +1,36 @@
+{#- schema.org markup for search engines and readers, from zola.toml's `author` and `me`. A post is a
+    BlogPosting by its author; the home page is the WebSite; the about page is the author's ProfilePage.
+    Other pages carry none. Built by hand: Tera has no map literals, so every value goes through json_encode. -#}
+{%- set a = config.extra.author -%}
+{%- set person -%}
+{"@type": "Person", "name": {{ a.name | json_encode | safe }}, "url": {{ a.url | json_encode | safe }}, "sameAs": [{% for p in config.extra.me %}{{ p.url | json_encode | safe }}{% if not loop.last %}, {% endif %}{% endfor %}]}
+{%- endset -%}
+{%- if page and page.components | first == "posts" %}
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BlogPosting",
+ "headline": {{ page.title | json_encode | safe }},
+ "description": {{ page_description | json_encode | safe }},
+ "datePublished": {{ page.date | json_encode | safe }},
+ "dateModified": {% if page.updated %}{{ page.updated | json_encode | safe }}{% else %}{{ page.date | json_encode | safe }}{% endif %},
+ "url": {{ page.permalink | json_encode | safe }},
+ "mainEntityOfPage": {{ page.permalink | json_encode | safe }},
+ "image": {{ get_url(path=card) | json_encode | safe }},
+ "inLanguage": "en",
+ "author": {{ person | safe }}}
+</script>
+{%- elif current_path == "/" %}
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebSite",
+ "name": {{ config.title | json_encode | safe }},
+ "url": {{ config.base_url | json_encode | safe }},
+ "description": {{ config.description | json_encode | safe }},
+ "inLanguage": "en",
+ "author": {{ person | safe }}}
+</script>
+{%- elif page and page.path is starting_with(pat="/about") %}
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "ProfilePage",
+ "url": {{ page.permalink | json_encode | safe }},
+ "mainEntity": {{ person | safe }}}
+</script>
+{%- endif %}

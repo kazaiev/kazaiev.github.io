@@ -25,6 +25,10 @@
 <link rel="stylesheet" href="{{ get_url(path='giallo.css') }}">
 <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
 <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+{%- for p in config.extra.me %}
+<link rel="me" href="{{ p.url }}">
+{%- endfor %}
+{% include "partials/jsonld.html" %}
 </head>
 <body{% block body_attrs %}{% endblock body_attrs %}>
 <header class="site-header"><div class="wide">

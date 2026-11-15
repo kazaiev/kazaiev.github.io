@@ -9,4 +9,4 @@ I'm Alex. I've been writing software for a living since 2003: games first, then 
 
 This place is for the other part, the evenings at the bench: whatever the desk is holding this week. Some of it works. The parts that don't teach me more, so I write those down too.
 
-Code lives at [github.com/kazaiev](https://github.com/kazaiev).
+Code lives at <a rel="me" href="https://github.com/kazaiev">github.com/kazaiev</a>.

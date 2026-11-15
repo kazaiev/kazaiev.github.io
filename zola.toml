@@ -16,4 +16,11 @@ theme = "github-dark"
 
 [extra]
 # The social card each theme falls back to, when a page names none.
-cards = { fox = "img/card-fox.png", oxide = "img/oxidized-ink-card.png", tesser = "img/tesser-4c7-card.png" }
+cards = { fox = "img/card-fox.png", oxide = "img/oxidized-ink-card.png", tesser = "img/tesser-4c7-card.png", bench = "img/small-builds-card.png" }
+# Who writes here: the author in every page's JSON-LD (partials/jsonld.html).
+author = { name = "Alex Kazaiev", url = "https://alex.k4zka.online/" }
+# Profiles that are the same person: <link rel="me"> in every page's head, and the author's sameAs. A pair
+# verifies only when the profile links back to https://alex.k4zka.online (GitHub: the profile's website field).
+me = [
+  { name = "GitHub", url = "https://github.com/kazaiev" },
+]
