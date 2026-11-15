@@ -1,6 +1,8 @@
 "use strict";
 // A wireframe solid drawn live in characters, on the same dark screen as the ASCII heroes: a slab the
-// shape of an e-reader (3:4, thin), or a Tesser-4C7 tile, floats, turning slowly and bobbing. Its edges are bold characters, the
+// shape of an e-reader (3:4, thin), a Tesser-4C7 tile, or the parking light's LED strip, floats, turning
+// slowly and bobbing. The strip swings rather than spins, so its LEDs stay in view, and they run the
+// firmware's own cycle as a car parks. Its edges are bold characters, the
 // same family as the fox and the drop, each cell keeping its own character as the edge passes through it;
 // corners are +. Nearer edges are brighter; the corners take the theme's second colour. A dim field of
 // characters sits behind it, and a blurred copy of the edges glows. With reduced motion it draws one frame.
@@ -24,7 +26,12 @@
     // a Tesser-4C7 tile, 72 x 72 x 28 mm: its screen on the front, and the halo (a band of clear
     // filament) lit round its sides just behind the lid
     tile: { half: [0.8, 0.8, 0.31], loops: [rect(0.8, 0.8, 0.266, "corner"), rect(0.8, 0.8, 0.133, "corner"), rect(0.46, 0.35, 0.31, "edge")] },
+    // the parking light's strip, 22 LEDs up its face, standing on end; at rest, the bar nearly full
+    strip: { half: [0.17, 1.25, 0.03], leds: 22, swing: true, rest: 6.0 },
   };
+  // the strip's colours, by position along the bar as in the firmware: green to half, amber to 80%, then red
+  const LED_GREEN = [70, 220, 100], LED_AMBER = [255, 165, 40], LED_RED = [255, 70, 55];
+  const ledColour = (i, n) => (i * 100 / n < 50 ? LED_GREEN : i * 100 / n < 80 ? LED_AMBER : LED_RED);
   const EDGES = [[0, 1], [1, 3], [3, 2], [2, 0], [4, 5], [5, 7], [7, 6], [6, 4], [0, 4], [1, 5], [2, 6], [3, 7]];
 
   const pick = a => a[Math.floor(Math.random() * a.length)];
@@ -42,6 +49,7 @@
       this.el = el;
       const solid = SOLIDS[el.dataset.solid] || SOLIDS.slab;
       this.half = solid.half; this.loops = solid.loops || [];
+      this.leds = solid.leds || 0; this.swing = !!solid.swing; this.rest = solid.rest || 7.0;
       const style = getComputedStyle(el);
       this.edge = rgb(style.getPropertyValue("--accent") || "#f75c14");
       this.corner = rgb(style.getPropertyValue("--accent-2") || "#3cc6c4");
@@ -57,7 +65,7 @@
       new ResizeObserver(() => { clearTimeout(this.rt); this.rt = setTimeout(() => this.layout(), 120); }).observe(el);
       this.layout();
       this.last = 0;
-      if (REDUCED) this.draw(7.0);
+      if (REDUCED) this.draw(this.rest);
       else requestAnimationFrame(t => this.frame(t));
     }
 
@@ -79,7 +87,7 @@
       // the solid's centre and scale, in cells: left of middle, about 70% of the height
       this.cx = this.cols * 0.36; this.cy = this.rows * 0.47;
       this.scale = this.rows * 0.52;
-      if (REDUCED) this.draw(7.0);
+      if (REDUCED) this.draw(this.rest);
     }
 
     glyph(ctx, x, y, ch) {
@@ -93,7 +101,7 @@
 
     // the turn at time t, as a function from a point on the solid to [cell x, cell y, depth]
     turn(t) {
-      const yaw = t * 0.24, pitch = 0.32 + 0.1 * Math.sin(t * 0.37), roll = 0.08 * Math.sin(t * 0.23);
+      const yaw = this.swing ? 1.05 * Math.sin(t * 0.3) : t * 0.24, pitch = 0.32 + 0.1 * Math.sin(t * 0.37), roll = 0.08 * Math.sin(t * 0.23);
       const bob = 0.035 * Math.sin(t * 0.61);
       return (x, y, z) => {
         [x, z] = [x * Math.cos(yaw) + z * Math.sin(yaw), -x * Math.sin(yaw) + z * Math.cos(yaw)];
@@ -102,6 +110,18 @@
         const p = 7 / (7 - z);  // a gentle perspective; +z is toward the viewer
         return [this.cx + x * p * this.scale, this.cy - (y + bob) * p * this.scale * 0.5, z];
       };
+    }
+
+    // The strip's LEDs at time t, a colour each or null for dark: a 12 s loop of a car parking. Nothing in
+    // view; the bar filling as it comes closer, slowing as it nears; the whole strip blinking red past the
+    // limit; the full bar once it backs off to it; then dark, as when nothing moves.
+    ledState(t) {
+      const n = this.leds, c = t % 12, out = new Array(n).fill(null);
+      const bar = lit => { for (let i = 0; i < lit; i++) out[i] = ledColour(i, n); };
+      if (c >= 1 && c < 7) { const u = (c - 1) / 6; bar(1 + Math.round((1 - (1 - u) * (1 - u)) * (n - 1))); }
+      else if (c >= 7 && c < 9) { if (Math.floor((c - 7) / 0.3) % 2 === 0) out.fill(LED_RED); }
+      else if (c >= 9 && c < 10.5) bar(n);
+      return out;
     }
 
     draw(t) {
@@ -132,6 +152,16 @@
         for (let i = 0; i < 4; i++) line(ps[i], ps[(i + 1) % 4], col);
       }
       for (const [x, y, z] of pts) put(Math.round(x), Math.round(y), "+", z + 1, this.corner);
+      if (this.leds && turn(0, 0, hz)[2] > turn(0, 0, -hz)[2]) {  // only while the LEDs' face is toward us
+        const state = this.ledState(t), n = this.leds;
+        for (let i = 0; i < n; i++) {
+          const ly = -hy * 0.9 + 1.8 * hy * i / (n - 1);  // LED 0 at the bottom, by the wires
+          for (const lx of [-0.5 * hx, 0, 0.5 * hx]) {      // each LED a few cells across, like the 5050 package
+            const [x, y, z] = turn(lx, ly, hz);
+            put(Math.round(x), Math.round(y), state[i] ? "@" : "o", z + 2, state[i] || this.far);
+          }
+        }
+      }
       sx.font = gx.font = `bold ${this.size}px ${FONT}`;
       for (const c of cells.values()) {
         sx.clearRect(c.x * this.cw, c.y * this.chh, this.cw, this.chh);

@@ -3,6 +3,7 @@ transparent = true
 title = "Tesser-4C7"
 description = "A grid of small computers that snap together into one machine."
 template = "project.html"
+weight = 2
 sort_by = "date"
 
 [extra]

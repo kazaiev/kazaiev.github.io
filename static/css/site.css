@@ -3,7 +3,8 @@
 @font-face { font-family: "JetBrains Mono"; font-weight: 800; font-display: swap; src: url("../fonts/JetBrainsMono-ExtraBold.woff2") format("woff2"); }
 
 /* One theme per project. `fox` is the k4zka fox's magenta and purple, for everything personal;
-   `oxide` is OxidizedInk's rust and verdigris; `tesser` is Tesser-4C7's phosphor and amber.
+   `oxide` is OxidizedInk's rust and verdigris; `tesser` is Tesser-4C7's phosphor and amber; `bench` is
+   Small Builds' sensor-board blue and solder-flux yellow.
    A new project adds a block here. */
 :root, [data-theme="fox"] {
   --bg: #0b0612; --surface: #150c20; --border: #2b1a3d;
@@ -22,6 +23,12 @@
   --text: #e2f1e8; --muted: #8ea89b;
   --accent: #3df2a0; --accent-2: #f5b43c; --glow: rgba(61, 242, 160, .45);
   --screen: #020403;
+}
+[data-theme="bench"] {
+  --bg: #060910; --surface: #0d131e; --border: #1d2a3e;
+  --text: #e4eaf3; --muted: #93a2b8;
+  --accent: #4da3ff; --accent-2: #ffd23f; --glow: rgba(77, 163, 255, .5);
+  --screen: #000;
 }
 
 * { box-sizing: border-box; }

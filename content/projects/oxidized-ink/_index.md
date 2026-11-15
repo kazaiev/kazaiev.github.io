@@ -3,6 +3,7 @@ transparent = true
 title = "OxidizedInk"
 description = "Firmware for an e-book reader on the Inkplate 6, written in Rust."
 template = "project.html"
+weight = 1
 sort_by = "date"
 
 [extra]

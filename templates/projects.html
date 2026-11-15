@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{#- The projects list, with circuit traces routing themselves on the left, behind the cards. #}
+{#- The projects list, with circuit traces routing themselves on the left, behind the cards. The cards follow each
+    project's `weight`: the projects in the order they began, Small Builds last. #}
 {% block stage %}
 <div class="stage">
 <div class="hero backdrop traces" role="img" aria-label="Circuit traces in glowing characters, routing themselves across a board"></div>
